@@ -1,6 +1,6 @@
 import { actionTypes } from './constants'
 import { pick, omit } from 'lodash'
-import { flow, set, merge } from 'lodash/fp'
+import { assign, set } from 'object-path-immutable'
 
 const {
   START,
@@ -172,12 +172,9 @@ export const timestampsReducer = (state = {}, { type, path }) => {
 const createDataReducer = (actionKey = 'data') => (state = {}, action) => {
   switch (action.type) {
     case SET:
-      return flow(
-        set(getDotStrPath(action.path), action[actionKey]),
-        merge(state)
-      )({})
+      return assign(state, getDotStrPath(action.path), action[actionKey])
     case NO_VALUE:
-      return set(getDotStrPath(action.path), null, state)
+      return set(state, getDotStrPath(action.path), null)
     case LOGOUT:
       // support keeping data when logging out - #125
       if (action.preserve) {

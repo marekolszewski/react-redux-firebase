@@ -60,6 +60,7 @@
     "hoist-non-react-statics": "^2.2.2",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
+    "object-path-immutable": "^0.5.1",
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
